@@ -12,7 +12,13 @@
 ;外挂规则设置
 ruleset=🍎 Apple,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.list
 ruleset=🌐 Google,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.list
-ruleset=🌐 Google,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.txt
+ruleset=🎥 Netflix,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.list
+ruleset=Ⓜ️ Microsof,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
+ruleset=📲 Telegram,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
+ruleset=📹 YouTub,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list
+ruleset=📺 BiliBili,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.list
+ruleset=🎮 Steam,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.list
+ruleset=🤖 OpenAi,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.list
 ;设置分组标志位
 custom_proxy_group=💸 Proxies`select`[]♻️ UrlTest`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP`[]🇺🇲 US`.*
 custom_proxy_group=🌐 Google`select`[]DIRECT`[]💸 Proxies`[]🇺🇲 US`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP
@@ -20,6 +26,7 @@ custom_proxy_group=🎥 Netflix`select`[]💸 Proxies`[]🇸🇬 SG`[]🇭🇰 H
 custom_proxy_group=Ⓜ️ Microsoft`select`[]DIRECT`[]💸 Proxies`[]🇺🇲 US`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP
 custom_proxy_group=🍎 Apple`select`[]DIRECT`[]💸 Proxies`[]🇺🇲 US`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP
 custom_proxy_group=📲 Telegram`select`[]💸 Proxies`[]♻️ UrlTest`[]🇸🇬 SG`[]🇭🇰 HK`[]🇨🇳 TW`[]🇯🇵 JP`[]🇺🇲 US`[]DIRECT
+custom_proxy_group=🤖 OpenAi`select`[]💸 Proxies`[]🇺🇲 US`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP`
 custom_proxy_group=📹 YouTube`select`[]💸 Proxies`[]♻️ UrlTest`[]🇸🇬 SG`[]🇭🇰 HK`[]🇨🇳 TW`[]🇯🇵 JP`[]🇺🇲 US`[]DIRECT
 custom_proxy_group=📺 BiliBili`select`[]🇨🇳 TW`[]🇭🇰 HK`[]DIRECT
 custom_proxy_group=🎮 Steam`select`[]DIRECT`[]💸 Proxies`[]🇺🇲 US`[]🇭🇰 HK`[]🇨🇳 TW`[]🇸🇬 SG`[]🇯🇵 JP`
