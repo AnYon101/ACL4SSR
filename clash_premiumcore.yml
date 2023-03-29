@@ -1,0 +1,414 @@
+port: 7890
+allow-lan: true
+bind-address: '*'
+mode: Rule
+log-level: info
+external-controller: '127.0.0.1:9090'
+dns:
+  enable: true
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  ipv6: false
+  use-hosts: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - stun.*.*.*
+    - stun.*.*
+    - time.windows.com
+    - time.nist.gov
+    - time.apple.com
+    - time.asia.apple.com
+    - "*.ntp.org.cn"
+    - "*.openwrt.pool.ntp.org"
+    - time1.cloud.tencent.com
+    - time.ustc.edu.cn
+    - pool.ntp.org
+    - ntp.ubuntu.com
+    - ntp.aliyun.com
+    - ntp1.aliyun.com
+    - ntp2.aliyun.com
+    - ntp3.aliyun.com
+    - ntp4.aliyun.com
+    - ntp5.aliyun.com
+    - ntp6.aliyun.com
+    - ntp7.aliyun.com
+    - time1.aliyun.com
+    - time2.aliyun.com
+    - time3.aliyun.com
+    - time4.aliyun.com
+    - time5.aliyun.com
+    - time6.aliyun.com
+    - time7.aliyun.com
+    - "*.time.edu.cn"
+    - time1.apple.com
+    - time2.apple.com
+    - time3.apple.com
+    - time4.apple.com
+    - time5.apple.com
+    - time6.apple.com
+    - time7.apple.com
+    - time1.google.com
+    - time2.google.com
+    - time3.google.com
+    - time4.google.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - localhost.ptlogin2.qq.com
+    - "*.*.*.srv.nintendo.net"
+    - "*.*.stun.playstation.net"
+    - xbox.*.*.microsoft.com
+    - "*.ipv6.microsoft.com"
+    - "*.*.xboxlive.com"
+    - speedtest.cros.wr.pvp.net
+  nameserver:
+    - https://223.6.6.6/dns-query
+    - https://rubyfish.cn/dns-query
+    - https://dns.pub/dns-query
+  fallback:
+    - https://dns.rubyfish.cn/dns-query
+    - https://public.dns.iij.jp/dns-query
+    - tls://8.8.4.4
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+    domain:
+      - +.google.com
+      - +.facebook.com
+      - +.twitter.com
+      - +.youtube.com
+      - +.xn--ngstr-lra8j.com
+      - +.google.cn
+      - +.googleapis.cn
+      - +.googleapis.com
+      - +.gvt1.com
+proxies:
+
+proxy-providers:
+  sample A: 
+    type: file
+ #localA为clash订阅下载的本地文件
+    path: localA.yml 
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204    
+  HK: 
+    type: file
+    path: localA.yml 
+#CLASH premium core只支持在原providers正则筛选节点，meta core可在直接在group中对sample a筛选
+    filter: "港|HK|Hong Kong"
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204   
+  SG: 
+    type: file
+    path: localA.yml
+    filter: "新加坡|坡|狮城|SG|Singapore|新"
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204   
+  JP: 
+    type: file
+    path: localA.yml
+    filter: "日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan"
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204   
+  US: 
+    type: file
+    path: localA.yml
+    filter: "美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States"
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204   
+  TW: 
+    type: file
+    path: localA.yml
+    filter: "台|新北|彰化|TW|Taiwan"
+    health-check:
+      enable: true
+      interval: 36000
+      url: https://cp.cloudflare.com/generate_204   
+         
+proxy-groups:
+  - name: 💸 Proxies
+    type: select
+    use:
+      - sample A
+    proxies:
+      - ♻️ UrlTest
+      - DIRECT
+  - name: 🌐 Google
+    type: select
+    proxies:
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+      
+  - name: 🎥 Netflix
+    type: select
+    proxies:
+      - 💸 Proxies
+      - 🇸🇬 SG
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇯🇵 JP
+      - 🇺🇲 US
+     
+  - name: Ⓜ️ Microsoft
+    type: select
+    proxies:
+      - DIRECT
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+      
+  - name: 🍎 Apple
+    type: select
+    proxies:
+      - DIRECT
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+     
+  - name: 📲 Telegram
+    type: select
+    proxies:
+      - 💸 Proxies
+      - ♻️ UrlTest
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+    
+  - name: 🤖 OpenAi
+    type: select
+    proxies:
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+   
+  - name: 📹 YouTube
+    type: select
+    proxies:
+      - 💸 Proxies
+      - ♻️ UrlTest
+      - 🇸🇬 SG
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇯🇵 JP
+      - 🇺🇲 US
+   
+  - name: 📺 BiliBili
+    type: select
+    proxies:
+      - DIRECT
+      - 🇨🇳 TW
+      - 🇭🇰 HK
+  - name: 🎮 Steam
+    type: select
+    proxies:
+      - DIRECT
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+     
+  - name: ✅ Straight
+    type: select
+    proxies:
+      - DIRECT
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+    
+  - name: 🐟 Final
+    type: select
+    proxies:
+      - DIRECT
+      - 💸 Proxies
+      - 🇺🇲 US
+      - 🇭🇰 HK
+      - 🇨🇳 TW
+      - 🇸🇬 SG
+      - 🇯🇵 JP
+      
+  - name: ♻️ UrlTest
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+    use:
+      - sample A
+        
+  - name: 🇭🇰 HK
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:      
+    use:
+      - HK
+              
+  - name: 🇸🇬 SG
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:      
+    use:
+      - SG
+
+  - name: 🇨🇳 TW
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+    use:
+      - TW
+      
+  - name: 🇯🇵 JP
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+    use:
+      - JP     
+
+  - name: 🇺🇲 US
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    proxies:
+    use: 
+      - US      
+  
+rule-providers:
+  APPLE:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /APPLE.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml"
+  GOOGLE:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /GOOGLE.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml"
+  Microsoft:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /Microsoft.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml"
+  Telegram:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /Telegram.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml"
+  Netflix:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /Netflix.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml"
+  YouTube:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /YouTube.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml"
+  BiliBili:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /BiliBili.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml"
+  Steam:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /Steam.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml"
+  China_Classical:
+    behavior: classical # domain ipcidr
+    interval: 259200
+    path: /China_Classical.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Classical.yaml"
+  
+
+rules:
+  - RULE-SET,APPLE,🍎 Apple
+  - RULE-SET,GOOGLE,🌐 Google
+  - RULE-SET,Microsoft,Ⓜ️ Microsoft
+  - RULE-SET,Telegram,📲 Telegram
+  - RULE-SET,Netflix,🎥 Netflix
+  - RULE-SET,YouTube,📹 YouTube
+  - RULE-SET,BiliBili,📺 BiliBili
+  - RULE-SET,Steam,🎮 Steam
+  - RULE-SET,China_Classical,✅ Straight  
+  - DOMAIN-SUFFIX,openai.com,🤖 OpenAi
+  - DOMAIN-SUFFIX,openai.nooc.ink,🤖 OpenAi
+  - DOMAIN-SUFFIX,AI.com,🤖 OpenAi
+  - GEOIP,LAN,✅ Straight
+  - GEOIP,CN,✅ Straight
+  - MATCH,🐟 Final
+ 
+ 
