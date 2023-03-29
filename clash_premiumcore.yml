@@ -113,9 +113,8 @@ proxies:
 
 proxy-providers:
   sample A: 
-    type: file
- #localA为clash订阅下载的本地文件
-    path: localA.yml 
+    type: file 
+    path: localA.yml  #localA为clash订阅下载的本地文件
     health-check:
       enable: true
       interval: 36000
@@ -123,8 +122,7 @@ proxy-providers:
   HK: 
     type: file
     path: localA.yml 
-#CLASH premium core只支持在原providers正则筛选节点，meta core可在直接在group中对sample a筛选
-    filter: "港|HK|Hong Kong"
+    filter: "港|HK|Hong Kong" #CLASH premium core只支持在原providers正则筛选节点，meta core可在直接在group中对sample a筛选
     health-check:
       enable: true
       interval: 36000
