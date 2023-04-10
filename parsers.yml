@@ -1,4 +1,10 @@
-  # 建立自己的配置
+code: 
+  module.exports.parse = (raw, { yaml }) => {
+    const rawObj = yaml.parse(raw)
+    const groups = []
+    const rules = []
+    return
+ # 建立自己的配置
     yaml:
       prepend-proxy-groups: # 建立策略组
       - name: 💸 Proxies
