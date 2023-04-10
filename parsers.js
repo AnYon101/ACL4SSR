@@ -1,5 +1,5 @@
 
-    code:
+  
       module.exports.parse = (raw, { yaml }) => {
         const rawObj = yaml.parse(raw)
         const groups = []
